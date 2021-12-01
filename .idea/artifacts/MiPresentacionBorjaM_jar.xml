@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MiPresentacionBorjaM:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MiPresentacionBorjaM_jar</output-path>
+    <root id="archive" name="MiPresentacionBorjaM.jar">
+      <element id="module-output" name="MiPresentacionBorjaM" />
+    </root>
+  </artifact>
+</component>
