@@ -106,7 +106,7 @@ public class GUI_Presentacion extends JFrame {
                 miTextoExpectativas.setLineWrap(true);
                 miTextoExpectativas.setWrapStyleWord(true);
                 miTextoExpectativas.setEditable(false);
-                miTextoExpectativas.setText("**No se nada de programación orientada a eventos. Espero a lo largo del curso aplicar y dominar todas las herramientas.\nMis expectativas son altas para este semestre, deseo sea mucho mejor que el semestre anterior.");
+                miTextoExpectativas.setText("No se nada de programación orientada a eventos. Espero a lo largo del curso aplicar y dominar todas las herramientas.\nMis expectativas son altas para este semestre, deseo sea mucho mejor que el semestre anterior.");
                 miTextoExpectativas.setBackground(Color.WHITE);
                 panelDatos.add(miTextoExpectativas);
 
