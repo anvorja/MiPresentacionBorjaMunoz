@@ -1,8 +1,8 @@
 package miPresentacion;
 
 import java.awt.*; //listener: los escuchas
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import java.util.Objects;
 import javax.swing.*; //source: fuente generadora de eventos
 import javax.swing.border.TitledBorder;
 
@@ -68,13 +68,13 @@ public class GUI_Presentacion extends JFrame {
 
         mifoto = new JButton("Este soy yo");
         // adicionamos al componente gráfico
-        mifoto.addActionListener(escucha);
+        mifoto.addMouseListener(escucha);
         mifoto.setBackground(Color.lightGray);
         miHobby = new JButton("Este es mi pasatiempo");
-        miHobby.addActionListener(escucha);
+        miHobby.addMouseListener(escucha);
         miHobby.setBackground(Color.lightGray);
         misExpectativas = new JButton("Expectativas");
-        misExpectativas.addActionListener(escucha);
+        misExpectativas.addKeyListener(escucha);
         misExpectativas.setBackground(Color.lightGray);
 
         panelBotones = new JPanel();
@@ -91,6 +91,83 @@ public class GUI_Presentacion extends JFrame {
         miTextoExpectativas = new JTextArea(12, 24);
     }
 
+    private class Escucha implements MouseListener, KeyListener {
+
+        private ImageIcon image;
+
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+            if ((e.getComponent() == misExpectativas) &&
+                    (e.getKeyChar() == KeyEvent.VK_M)) {
+                panelDatos.removeAll();
+
+                miTextoExpectativas.setFont(new Font("SansSerif", 1, 20));
+                miTextoExpectativas.setLineWrap(true);
+                miTextoExpectativas.setWrapStyleWord(true);
+                miTextoExpectativas.setEditable(false);
+                miTextoExpectativas.setText("**No se nada de programación orientada a eventos. Espero a lo largo del curso aplicar y dominar todas las herramientas.\nMis expectativas son altas para este semestre, deseo sea mucho mejor que el semestre anterior.");
+                miTextoExpectativas.setBackground(Color.WHITE);
+                panelDatos.add(miTextoExpectativas);
+
+                revalidate();
+                repaint();
+            }
+
+
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+
+            if ((e.getComponent() == mifoto) && (e.getClickCount() == 1)) {
+                panelDatos.removeAll();
+                image = new ImageIcon(getClass().getResource("/recursos/borjaM.jpeg"));
+                labelImagen.setIcon(image);
+                panelDatos.add(labelImagen);
+            }
+            if ((e.getComponent() == miHobby) && (e.getClickCount() == 2)) {
+                panelDatos.removeAll();
+                image = new ImageIcon(getClass().getResource("/recursos/hobbie (1).jpeg"));
+                labelImagen.setIcon(image);
+                panelDatos.add(labelImagen);
+            }
+
+            revalidate();
+            repaint();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
+    }
+
     public static void main(String[] args) {
 
         // objeto que permite manejo de eventos
@@ -105,55 +182,5 @@ public class GUI_Presentacion extends JFrame {
                 GUI_Presentacion miGUIPresentacion = new GUI_Presentacion();
             }
         });
-    }
-
-    // no heredan sino que se implementan
-    // implementará el metodo ActionListeners
-    // ActionListener es un Escucha de acción
-    // es decir al dar click sobre un boton él se dirije
-    // al método actionPerformed(ActionEvent e)
-    private class Escucha implements ActionListener {
-
-        private ImageIcon image;
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            // la sgte línea es una prueba de lo que hace al dar clic
-            // en un boton y llamar a actionPerformed
-            // JOptionPane.showMessageDialog(null, "oprime el boton");
-
-            panelDatos.removeAll();
-
-            // para indicar cuál boton fue, hacemos condicionales
-            if (e.getSource() == mifoto) {
-                image = new ImageIcon(getClass().getResource("/recursos/borjaM.jpeg"));
-                labelImagen.setIcon(image);
-                panelDatos.add(labelImagen);
-
-            } else {
-                if (e.getSource() == miHobby) {
-                    image = new ImageIcon(
-                            getClass().getResource("/recursos/hobbie (1).jpeg"));
-                    labelImagen.setIcon(image);
-                    panelDatos.add(labelImagen);
-
-                } else {
-                    miTextoExpectativas.setFont(new Font("SansSerif", 1, 20));
-                    miTextoExpectativas.setFont(
-                            new Font(Font.SANS_SERIF, Font.BOLD + Font.ITALIC, 20));
-                    miTextoExpectativas.setLineWrap(true);
-                    miTextoExpectativas.setWrapStyleWord(true);
-                    miTextoExpectativas.setEditable(false);
-                    miTextoExpectativas.setText(
-                            "No se nada de programación orientada a eventos. Espero a lo largo del curso aplicar y dominar todas las herramientas.\nMis expectativas son altas para este semestre, deseo sea mucho mejor que el semestre anterior.");
-                    // miTextoExpectativas.setFont(new Font(Font.SANS_SERIF,
-                    // Font.BOLD+Font.ITALIC, 20));
-                    miTextoExpectativas.setBackground(Color.WHITE);
-                    panelDatos.add(miTextoExpectativas);
-                }
-            }
-            revalidate();
-            repaint();
-        }
     }
 }
